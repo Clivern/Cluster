@@ -7,6 +7,7 @@ package main
 import (
 	"fmt"
 	"github.com/clivern/cluster"
+	"os"
 )
 
 func main() {
@@ -24,9 +25,21 @@ func main() {
 	// Override configs
 	clus.SetConfig(config)
 
-	clus.AddLocalNode([]string{})
+	clus.AddLocalNode(os.Args[1:])
 
 	fmt.Println(clus.GetLocalNode())
+
+	fmt.Printf(
+		"Local member %s:%d\n",
+		clus.GetLocalNode().Addr,
+		clus.GetLocalNode().Port,
+	)
+
+	fmt.Printf(
+		"Execute on a different terminal $ go run basic_cluster.go %s:%d\n",
+		clus.GetLocalNode().Addr,
+		clus.GetLocalNode().Port,
+	)
 
 	for {
 

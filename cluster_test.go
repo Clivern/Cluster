@@ -12,13 +12,17 @@ import (
 func TestCluster(t *testing.T) {
 	// TestCluster
 	t.Run("TestCluster", func(t *testing.T) {
-		configs := NewNodeConfig()
-		configs.Format = "test-123-45-67-89"
-		clusterNode := NewClusterNode(configs)
+		cluster := &Cluster{}
+		nodeName := cluster.GetNodeName()
 
-		node, err := clusterNode.Init([]string{})
+		config := cluster.GetConfig()
+		config.Name = nodeName
+		cluster.SetConfig(config)
 
+		count, err := cluster.AddLocalNode([]string{})
+
+		Expect(t, count, 0)
 		Expect(t, err, nil)
-		Expect(t, node.Name, "test-123-45-67-89")
+		Expect(t, nodeName, cluster.GetLocalNode().Name)
 	})
 }

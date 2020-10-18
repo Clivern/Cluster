@@ -5,60 +5,58 @@
 package cluster
 
 import (
+	"fmt"
 	"os"
-	"strings"
 
 	"github.com/hashicorp/memberlist"
 )
 
-// NodeConfigs struct
-type NodeConfigs struct {
-	Format string
-}
-
-// ClusterNode struct
-type ClusterNode struct {
-	Config *memberlist.Config
-}
-
-// NewNodeConfig
-func NewNodeConfig() *NodeConfigs {
-	return &NodeConfigs{
-		Format: "{host}-{uuid}",
-	}
-}
-
-// NewClusterNode
-func NewClusterNode(config *NodeConfigs) *ClusterNode {
-	node := &ClusterNode{}
-
+// Cluster struct
+type Cluster struct {
 	// https://github.com/hashicorp/memberlist/blob/master/config.go#L350
-	node.Config = memberlist.DefaultLocalConfig()
-
-	hostname, _ := os.Hostname()
-	name := strings.Replace(config.Format, "{host}", hostname, -1)
-	name = strings.Replace(name, "{uuid}", GenerateUUID4(), -1)
-
-	node.Config.Name = name
-
-	return node
+	Config  *memberlist.Config
+	Memlist *memberlist.Memberlist
 }
 
-// Init
-func (c *ClusterNode) Init(members []string) (*memberlist.Node, error) {
-	m, err := memberlist.Create(c.Config)
+// GetConfig
+func (c *Cluster) GetConfig() *memberlist.Config {
+	return memberlist.DefaultLocalConfig()
+}
+
+// SetConfig
+func (c *Cluster) SetConfig(config *memberlist.Config) {
+	c.Config = config
+}
+
+// AddLocalNode
+func (c *Cluster) AddLocalNode(members []string) (int, error) {
+	var err error
+
+	c.Memlist, err = memberlist.Create(c.Config)
 
 	if err != nil {
-		return &memberlist.Node{}, err
+		return 0, err
 	}
 
 	if len(members) > 0 {
-		_, err := m.Join(members)
+		count, err := c.Memlist.Join(members)
 
 		if err != nil {
-			return &memberlist.Node{}, err
+			return count, err
 		}
 	}
 
-	return m.LocalNode(), nil
+	return 0, nil
+}
+
+// GetNodeName
+func (c *Cluster) GetNodeName() string {
+	hostname, _ := os.Hostname()
+
+	return fmt.Sprintf("%s--%s", hostname, GenerateUUID4())
+}
+
+// GetLocalNode
+func (c *Cluster) GetLocalNode() *memberlist.Node {
+	return c.Memlist.LocalNode()
 }

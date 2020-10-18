@@ -15,8 +15,31 @@
 
 ### Usage
 
-```
-#
+To create a cluster
+
+```golang
+import (
+    "github.com/clivern/cluster"
+)
+
+
+clus := &cluster.Cluster{}
+
+// Generate a unique name
+nodeName := clus.GetNodeName()
+
+// Get a default configs
+config := clus.GetConfig()
+config.Name = nodeName
+config.BindPort = 0 // assign a free port
+config.Events = &cluster.NodeEvents{}
+
+// Override configs
+clus.SetConfig(config)
+
+count, err := clus.AddLocalNode([]string{}) // or []string{"x.x.x.x:port"} in case of the second, third ... node
+
+// clus.GetLocalNode() get local node object
 ```
 
 ## Versioning

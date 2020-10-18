@@ -19,6 +19,7 @@ To create a cluster
 
 ```golang
 import (
+    "fmt"
     "github.com/clivern/cluster"
 )
 
@@ -37,9 +38,13 @@ config.Events = &cluster.NodeEvents{}
 // Override configs
 clus.SetConfig(config)
 
-count, err := clus.AddLocalNode([]string{}) // or []string{"x.x.x.x:port"} in case of the second, third ... node
+clus.AddLocalNode([]string{}) // or []string{"x.x.x.x:port"} in case of the second, third ... node
 
-// clus.GetLocalNode() get local node object
+fmt.Println(clus.GetLocalNode())
+
+// 2020/10/18 20:44:19 [DEBUG] memberlist: Using dynamic bind port 52053
+// A node has joined: Clivern-2.local--c5553465-2bc9-4ef1-8a83-384e5a0c4097
+// Clivern-2.local--c5553465-2bc9-4ef1-8a83-384e5a0c4097
 ```
 
 ## Versioning

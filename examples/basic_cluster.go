@@ -6,11 +6,11 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/clivern/cluster"
-	"os"
 )
 
-func main() {
+func LauchNode(members []string) string {
 	clus := &cluster.Cluster{}
 
 	// Generate a unique name
@@ -25,21 +25,34 @@ func main() {
 	// Override configs
 	clus.SetConfig(config)
 
-	clus.AddLocalNode(os.Args[1:])
-
-	fmt.Println(clus.GetLocalNode())
+	clus.AddLocalNode(members)
 
 	fmt.Printf(
-		"Local member %s:%d\n",
+		"Node Name: %s Addr: %s:%d\n",
+		clus.GetLocalNode().Name,
 		clus.GetLocalNode().Addr,
 		clus.GetLocalNode().Port,
 	)
 
-	fmt.Printf(
-		"Execute on a different terminal $ go run basic_cluster.go %s:%d\n",
+	return fmt.Sprintf(
+		"%s:%d",
 		clus.GetLocalNode().Addr,
 		clus.GetLocalNode().Port,
 	)
+}
+
+func main() {
+	node := LauchNode([]string{})
+
+	// Run cluster nodes
+	for i := 0; i < 5; i++ {
+		go func() {
+			LauchNode([]string{node})
+			for {
+
+			}
+		}()
+	}
 
 	for {
 

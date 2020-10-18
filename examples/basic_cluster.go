@@ -10,7 +10,7 @@ import (
 	"github.com/clivern/cluster"
 )
 
-func LauchNode(members []string) string {
+func LaunchNode(members []string) string {
 	clus := &cluster.Cluster{}
 
 	// Generate a unique name
@@ -42,12 +42,12 @@ func LauchNode(members []string) string {
 }
 
 func main() {
-	node := LauchNode([]string{})
+	node := LaunchNode([]string{})
 
 	// Run cluster nodes
 	for i := 0; i < 5; i++ {
 		go func() {
-			LauchNode([]string{node})
+			LaunchNode([]string{node})
 			for {
 
 			}

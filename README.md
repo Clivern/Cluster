@@ -4,8 +4,8 @@
     <p align="center">Golang Package for System Clustering.</p>
     <p align="center">
         <a href="https://travis-ci.com/Clivern/Cluster"><img src="https://travis-ci.com/Clivern/Cluster.svg?branch=main"></a>
-        <a href="https://github.com/Clivern/Cluster/releases"><img src="https://img.shields.io/badge/Version-0.0.5-red.svg"></a>
-        <a href="https://goreportcard.com/report/github.com/Clivern/Cluster"><img src="https://goreportcard.com/badge/github.com/Clivern/Cluster?v=0.0.5"></a>
+        <a href="https://github.com/Clivern/Cluster/releases"><img src="https://img.shields.io/badge/Version-0.0.6-red.svg"></a>
+        <a href="https://goreportcard.com/report/github.com/Clivern/Cluster"><img src="https://goreportcard.com/badge/github.com/Clivern/Cluster?v=0.0.6"></a>
         <a href="https://github.com/Clivern/Cluster/blob/master/LICENSE"><img src="https://img.shields.io/badge/LICENSE-MIT-orange.svg"></a>
     </p>
 </p>

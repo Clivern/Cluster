@@ -6,32 +6,28 @@ package cluster
 
 import (
 	"sync"
+
+	"github.com/hashicorp/memberlist"
 )
 
-// RoundRobin ...
-type RoundRobin struct {
+// RoundRobinBalancer ...
+type RoundRobinBalancer struct {
 	sync.Mutex
 
 	current int
-	pool    []int
+	pool    []*memberlist.Node
 }
 
-// NewRoundRobin ...
-func NewRoundRobin(size int) *RoundRobin {
-	a := make([]int, size)
-
-	for i := range a {
-		a[i] = i
-	}
-
-	return &RoundRobin{
+// NewRoundRobinBalancer ...
+func NewRoundRobinBalancer(clus *Cluster) *RoundRobinBalancer {
+	return &RoundRobinBalancer{
 		current: 0,
-		pool:    a,
+		pool:    clus.Memlist.Members(),
 	}
 }
 
 // Get ...
-func (r *RoundRobin) Get() int {
+func (r *RoundRobinBalancer) Get() *memberlist.Node {
 	r.Lock()
 	defer r.Unlock()
 

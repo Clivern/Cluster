@@ -11,12 +11,9 @@ import (
 	"github.com/clivern/cluster"
 )
 
-var (
-	delegate = &cluster.Delegate{}
-)
+func LaunchNode(members []string) (*cluster.Cluster, *cluster.Delegate) {
 
-func LaunchNode(members []string) *cluster.Cluster {
-	delegate = &cluster.Delegate{}
+	delegate := &cluster.Delegate{}
 
 	clus := &cluster.Cluster{}
 
@@ -56,11 +53,11 @@ func LaunchNode(members []string) *cluster.Cluster {
 
 	delegate.SetCluster(clus)
 
-	return clus
+	return clus, delegate
 }
 
 func main() {
-	clus := LaunchNode([]string{})
+	clus, delegate := LaunchNode([]string{})
 
 	address := fmt.Sprintf(
 		"%s:%d",
@@ -78,6 +75,7 @@ func main() {
 		}()
 	}
 
+	// push state value to cluster nodes
 	for {
 		delegate.UpdateState([]byte("Hello"))
 

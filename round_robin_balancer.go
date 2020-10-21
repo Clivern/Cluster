@@ -14,6 +14,7 @@ import (
 type RoundRobinBalancer struct {
 	sync.Mutex
 
+	cluster *Cluster
 	current int
 	pool    []*memberlist.Node
 }
@@ -21,6 +22,7 @@ type RoundRobinBalancer struct {
 // NewRoundRobinBalancer ...
 func NewRoundRobinBalancer(clus *Cluster) *RoundRobinBalancer {
 	return &RoundRobinBalancer{
+		cluster: clus,
 		current: 0,
 		pool:    clus.Memlist.Members(),
 	}
@@ -30,6 +32,8 @@ func NewRoundRobinBalancer(clus *Cluster) *RoundRobinBalancer {
 func (r *RoundRobinBalancer) Get() *memberlist.Node {
 	r.Lock()
 	defer r.Unlock()
+
+	r.pool = r.cluster.Memlist.Members()
 
 	if r.current >= len(r.pool) {
 		r.current = r.current % len(r.pool)

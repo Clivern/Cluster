@@ -3,8 +3,8 @@
     <h3 align="center">Cluster</h3>
     <p align="center">Golang Package for System Clustering.</p>
     <p align="center">
-        <a href="https://github.com/clivern/bf/actions/workflows/build.yml">
-            <img src="https://github.com/clivern/bf/workflows/Build/badge.svg">
+        <a href="https://github.com/clivern/cluster/actions/workflows/build.yml">
+            <img src="https://github.com/clivern/cluster/workflows/Build/badge.svg">
         </a>
         <a href="https://github.com/Clivern/Cluster/releases"><img src="https://img.shields.io/badge/Version-0.1.4-red.svg"></a>
         <a href="https://godoc.org/github.com/clivern/cluster"><img src="https://godoc.org/github.com/clivern/cluster?status.svg"></a>

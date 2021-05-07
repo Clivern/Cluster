@@ -14,7 +14,7 @@ help: Makefile
 ## install_revive: Install revive for linting.
 install_revive:
 	@echo ">> ============= Install Revive ============= <<"
-	$(GO) get github.com/mgechev/revive
+	./bin/revive.sh
 
 
 ## style: Check code style.
@@ -55,7 +55,7 @@ test:
 ## lint: Lint the code.
 lint:
 	@echo ">> ============= Lint All Files ============= <<"
-	revive -config config.toml -exclude vendor/... -formatter friendly ./...
+	./cache/revive -config config.toml -exclude vendor/... -formatter friendly ./...
 
 
 ## verify: Verify dependencies

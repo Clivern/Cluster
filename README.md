@@ -3,13 +3,19 @@
     <h3 align="center">Cluster</h3>
     <p align="center">Golang Package for System Clustering.</p>
     <p align="center">
-        <a href="https://travis-ci.com/Clivern/Cluster"><img src="https://travis-ci.com/Clivern/Cluster.svg?branch=main"></a>
-        <a href="https://github.com/Clivern/Cluster/releases"><img src="https://img.shields.io/badge/Version-0.1.3-red.svg"></a>
-        <a href="https://goreportcard.com/report/github.com/Clivern/Cluster"><img src="https://goreportcard.com/badge/github.com/Clivern/Cluster?v=0.0.6"></a>
+        <a href="https://github.com/clivern/bf/actions/workflows/build.yml">
+            <img src="https://github.com/clivern/bf/workflows/Build/badge.svg">
+        </a>
+        <a href="https://github.com/Clivern/Cluster/releases"><img src="https://img.shields.io/badge/Version-0.1.4-red.svg"></a>
+        <a href="https://godoc.org/github.com/clivern/cluster"><img src="https://godoc.org/github.com/clivern/cluster?status.svg"></a>
+        <a href="https://goreportcard.com/report/github.com/Clivern/Cluster">
+            <img src="https://goreportcard.com/badge/github.com/Clivern/Cluster?v=0.0.4">
+        </a>
         <a href="https://github.com/Clivern/Cluster/blob/master/LICENSE"><img src="https://img.shields.io/badge/LICENSE-MIT-orange.svg"></a>
     </p>
 </p>
 <br/>
+
 
 ## Documentation
 

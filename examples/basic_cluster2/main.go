@@ -21,7 +21,7 @@ func LaunchNode(members []string) string {
 	config := clus.GetConfig()
 	config.Name = nodeName
 	config.BindPort = 0 // assign a free port
-	config.Events = &cluster.NodeEvents{}
+	config.Events = cluster.NewNodeEvents(nil)
 
 	// Override configs
 	clus.SetConfig(config)

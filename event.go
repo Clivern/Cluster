@@ -5,7 +5,6 @@
 package cluster
 
 import (
-	"fmt"
 	"log"
 	"os"
 
@@ -26,37 +25,27 @@ type NodeEvents struct {
 	Logger Logger
 }
 
-// NewNodeEvents creates a new NodeEvents instance with default logging.
-// Users can set a custom logger by modifying the Logger field.
-func NewNodeEvents() *NodeEvents {
+// NewNodeEvents creates a new NodeEvents instance.
+func NewNodeEvents(logger Logger) *NodeEvents {
+	if logger == nil {
+		logger = log.New(os.Stdout, "[cluster] ", log.LstdFlags)
+	}
 	return &NodeEvents{
-		Logger: log.New(os.Stdout, "[cluster] ", log.LstdFlags),
+		Logger: logger,
 	}
 }
 
 // NotifyJoin is called when a node joins the cluster.
 func (n *NodeEvents) NotifyJoin(node *memberlist.Node) {
-	if n.Logger != nil {
-		n.Logger.Printf("A node has joined: %s", node.String())
-	} else {
-		fmt.Println("A node has joined: " + node.String())
-	}
+	n.Logger.Printf("A node has joined: %s", node.String())
 }
 
 // NotifyLeave is called when a node leaves the cluster.
 func (n *NodeEvents) NotifyLeave(node *memberlist.Node) {
-	if n.Logger != nil {
-		n.Logger.Printf("A node has left: %s", node.String())
-	} else {
-		fmt.Println("A node has left: " + node.String())
-	}
+	n.Logger.Printf("A node has left: %s", node.String())
 }
 
 // NotifyUpdate is called when a node's metadata is updated.
 func (n *NodeEvents) NotifyUpdate(node *memberlist.Node) {
-	if n.Logger != nil {
-		n.Logger.Printf("A node was updated: %s", node.String())
-	} else {
-		fmt.Println("A node was updated: " + node.String())
-	}
+	n.Logger.Printf("A node was updated: %s", node.String())
 }

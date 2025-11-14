@@ -40,7 +40,6 @@ func (c *Cluster) SetConfig(config *memberlist.Config) {
 // AddLocalNode creates a new memberlist instance and optionally joins existing members.
 // If members is empty, it creates a standalone node. Otherwise, it attempts to join
 // the cluster using the provided member addresses.
-// Returns the number of nodes successfully joined and any error that occurred.
 func (c *Cluster) AddLocalNode(members []string) (int, error) {
 	var err error
 

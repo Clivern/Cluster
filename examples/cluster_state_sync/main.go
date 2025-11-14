@@ -14,7 +14,7 @@ import (
 
 func LaunchNode(members []string) (*cluster.Cluster, *cluster.Delegate) {
 
-	delegate := &cluster.Delegate{}
+	delegate := cluster.NewDelegate(nil)
 
 	clus := &cluster.Cluster{}
 
@@ -25,7 +25,7 @@ func LaunchNode(members []string) (*cluster.Cluster, *cluster.Delegate) {
 	config := clus.GetConfig()
 	config.Name = nodeName
 	config.BindPort = 0 // assign a free port
-	config.Events = &cluster.NodeEvents{}
+	config.Events = cluster.NewNodeEvents(nil)
 	config.Delegate = delegate
 	config.PushPullInterval = time.Second * 10 // to make it demonstrable
 	config.ProbeInterval = time.Second * 1     // to make failure demonstrable

@@ -48,21 +48,19 @@ type Delegate struct {
 	Logger     Logger
 }
 
-// NewDelegate creates a new Delegate instance with default logging.
-func NewDelegate() *Delegate {
+// NewDelegate creates a new Delegate instance.
+func NewDelegate(logger Logger) *Delegate {
+	if logger == nil {
+		logger = log.New(os.Stdout, "[cluster] ", log.LstdFlags)
+	}
 	return &Delegate{
-		Logger: log.New(os.Stdout, "[cluster] ", log.LstdFlags),
+		Logger: logger,
 	}
 }
 
 // NotifyMsg is called when a broadcast message is received from another node.
 func (d *Delegate) NotifyMsg(msg []byte) {
-	if d.Logger != nil {
-		d.Logger.Printf("Received broadcast of remote state: %s", string(msg))
-	} else {
-		fmt.Printf(" === Received Broadcast of Remote State %s === \n", string(msg))
-	}
-
+	d.Logger.Printf("Received broadcast of remote state: %s", string(msg))
 	d.State = msg
 }
 
@@ -74,12 +72,7 @@ func (d *Delegate) NodeMeta(_ int) []byte {
 
 // LocalState returns the local state to be shared during push/pull synchronization.
 func (d *Delegate) LocalState(_ bool) []byte {
-	if d.Logger != nil {
-		d.Logger.Println("Sharing remote state for push/pull sync")
-	} else {
-		fmt.Println(" === Sharing Remote State for push/pull sync === ")
-	}
-
+	d.Logger.Println("Sharing remote state for push/pull sync")
 	return d.State
 }
 
@@ -93,12 +86,7 @@ func (d *Delegate) GetBroadcasts(overhead, limit int) [][]byte {
 
 // MergeRemoteState merges remote state received during push/pull synchronization.
 func (d *Delegate) MergeRemoteState(buf []byte, _ bool) {
-	if d.Logger != nil {
-		d.Logger.Printf("Merging remote state for push/pull sync: %s", string(buf))
-	} else {
-		fmt.Printf(" === Merging Remote State %s for push/pull sync === \n", string(buf))
-	}
-
+	d.Logger.Printf("Merging remote state for push/pull sync: %s", string(buf))
 	d.State = buf
 }
 

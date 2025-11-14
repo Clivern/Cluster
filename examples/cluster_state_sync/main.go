@@ -2,6 +2,7 @@
 // Use of this source code is governed by the MIT
 // license that can be found in the LICENSE file.
 
+// Package main demonstrates cluster state synchronization across multiple nodes.
 package main
 
 import (
@@ -69,9 +70,7 @@ func main() {
 	for i := 0; i < 5; i++ {
 		go func() {
 			LaunchNode([]string{address})
-			for {
-
-			}
+			select {} // Keep goroutine alive
 		}()
 	}
 

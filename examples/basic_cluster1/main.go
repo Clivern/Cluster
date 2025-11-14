@@ -2,6 +2,7 @@
 // Use of this source code is governed by the MIT
 // license that can be found in the LICENSE file.
 
+// Package main demonstrates a basic cluster setup with multiple nodes joining a single cluster.
 package main
 
 import (
@@ -48,13 +49,9 @@ func main() {
 	for i := 0; i < 5; i++ {
 		go func() {
 			LaunchNode([]string{node})
-			for {
-
-			}
+			select {} // Keep goroutine alive
 		}()
 	}
 
-	for {
-
-	}
+	select {} // Keep main goroutine alive
 }

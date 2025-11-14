@@ -6,12 +6,11 @@ package cluster
 
 import (
 	"reflect"
-	"testing"
 
-	"github.com/satori/go.uuid"
+	"github.com/google/uuid"
 )
 
-// InArray check if value is on array
+// InArray checks if a value exists in an array or slice.
 func InArray(val interface{}, array interface{}) bool {
 	switch reflect.TypeOf(array).Kind() {
 	case reflect.Slice:
@@ -27,24 +26,21 @@ func InArray(val interface{}, array interface{}) bool {
 	return false
 }
 
-// GenerateUUID4 create a UUID
+// GenerateUUID4 generates a new UUID v4 string.
 func GenerateUUID4() string {
-	u := uuid.Must(uuid.NewV4(), nil)
+	u, err := uuid.NewRandom()
+	if err != nil {
+		return ""
+	}
 	return u.String()
 }
 
-// Unset remove element at position i
+// Unset removes an element at position i from a string slice.
 func Unset(a []string, i int) []string {
+	if i < 0 || i >= len(a) {
+		return a
+	}
 	a[i] = a[len(a)-1]
 	a[len(a)-1] = ""
 	return a[:len(a)-1]
-}
-
-// Expect compare two values for testing
-func Expect(t *testing.T, got, want interface{}) {
-	t.Logf(`Comparing values %v, %v`, got, want)
-
-	if !reflect.DeepEqual(got, want) {
-		t.Errorf(`got %v, want %v`, got, want)
-	}
 }

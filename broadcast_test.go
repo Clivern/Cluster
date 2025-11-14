@@ -6,18 +6,21 @@ package cluster
 
 import (
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 // TestBroadcast test cases
-func TestBroadcast(t *testing.T) {
+func TestUnitBroadcast(t *testing.T) {
 	// TestMessage
 	t.Run("TestMessage", func(t *testing.T) {
 		m := &Message{
 			Key:   "key",
 			Value: "value",
 		}
-		m.Load(m.Bytes())
-		Expect(t, m.Key, "key")
-		Expect(t, m.Value, "value")
+		err := m.Load(m.Bytes())
+		assert.NoError(t, err)
+		assert.Equal(t, "key", m.Key)
+		assert.Equal(t, "value", m.Value)
 	})
 }

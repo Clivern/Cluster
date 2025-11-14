@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        go: ['1.17', '1.18']
+        go: ["1.24.9", "1.25.0", "1.25.3"]
     name: Go ${{ matrix.go }} run
     steps:
       - uses: actions/checkout@v3
@@ -21,7 +21,7 @@ jobs:
       - name: Get dependencies
         run: |
           export PATH=${PATH}:`go env GOPATH`/bin
-          make install_revive
+          make revive
 
       - name: Run make ci
         run: |

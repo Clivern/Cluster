@@ -6,10 +6,12 @@ package cluster
 
 import (
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 // TestCluster test cases
-func TestCluster(t *testing.T) {
+func TestUnitCluster(t *testing.T) {
 	// TestCluster
 	t.Run("TestCluster", func(t *testing.T) {
 		cluster := &Cluster{}
@@ -21,8 +23,8 @@ func TestCluster(t *testing.T) {
 
 		count, err := cluster.AddLocalNode([]string{})
 
-		Expect(t, count, 0)
-		Expect(t, err, nil)
-		Expect(t, nodeName, cluster.GetLocalNode().Name)
+		assert.Equal(t, 0, count)
+		assert.NoError(t, err)
+		assert.Equal(t, nodeName, cluster.GetLocalNode().Name)
 	})
 }

@@ -6,7 +6,7 @@
         <a href="https://github.com/clivern/cluster/actions/workflows/build.yml">
             <img src="https://github.com/clivern/cluster/workflows/Build/badge.svg">
         </a>
-        <a href="https://github.com/Clivern/Cluster/releases"><img src="https://img.shields.io/badge/Version-0.1.4-red.svg"></a>
+        <a href="https://github.com/Clivern/Cluster/releases"><img src="https://img.shields.io/badge/Version-0.2.0-blue.svg"></a>
         <a href="https://godoc.org/github.com/clivern/cluster"><img src="https://godoc.org/github.com/clivern/cluster?status.svg"></a>
         <a href="https://goreportcard.com/report/github.com/Clivern/Cluster">
             <img src="https://goreportcard.com/badge/github.com/Clivern/Cluster?v=0.0.4">

@@ -18,9 +18,9 @@ require (
 	github.com/hashicorp/memberlist v0.5.3 // indirect
 	github.com/miekg/dns v1.1.26 // indirect
 	github.com/sean-/seed v0.0.0-20170313163322-e2103e2c3529 // indirect
-	golang.org/x/crypto v0.40.0 // indirect
-	golang.org/x/net v0.42.0 // indirect
-	golang.org/x/sys v0.35.0 // indirect
+	golang.org/x/crypto v0.45.0 // indirect
+	golang.org/x/net v0.47.0 // indirect
+	golang.org/x/sys v0.38.0 // indirect
 )
 
 replace github.com/clivern/cluster => ../..

@@ -12,7 +12,7 @@ jobs:
         go: ["1.24.9", "1.25.0", "1.25.3"]
     name: Go ${{ matrix.go }} run
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
       - name: Setup go
         uses: actions/setup-go@v4
         with:
